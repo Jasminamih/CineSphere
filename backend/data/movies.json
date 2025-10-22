@@ -1,0 +1,122 @@
+[
+
+  {
+    "id": 2,
+    "type": "movie",
+    "title": "The Dark Knight",
+    "year": "2008",
+    "genre": "Action, Crime",
+    "description": "Batman faces the Joker in Gotham City.",
+    "image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+  },
+  {
+    "id": 3,
+    "type": "series",
+    "title": "Stranger Things",
+    "year": "2016",
+    "genre": "Sci-Fi, Horror",
+    "description": "Kids uncover supernatural mysteries in Hawkins.",
+    "image": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
+  },
+  {
+    "id": 4,
+    "type": "series",
+    "title": "Breaking Bad",
+    "year": "2008",
+    "genre": "Crime, Drama",
+    "description": "A chemistry teacher becomes a meth producer.",
+    "image": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"
+  },
+  {
+    "id": 5,
+    "type": "movie",
+    "title": "Interstellar",
+    "year": "2014",
+    "genre": "Sci-Fi, Adventure",
+    "description": "Explorers travel through a wormhole to save humanity.",
+    "image": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
+  },
+ 
+  {
+    "id": 7,
+    "type": "movie",
+    "title": "The Matrix",
+    "year": "1999",
+    "genre": "Sci-Fi, Action",
+    "description": "A hacker discovers reality is a simulation.",
+    "image": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
+  },
+  {
+    "id": 8,
+    "type": "movie",
+    "title": "Avengers: Endgame",
+    "year": "2019",
+    "genre": "Action, Adventure",
+    "description": "The Avengers try to undo Thanos’ destruction.",
+    "image": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
+  },
+  {
+    "id": 9,
+    "type": "series",
+    "title": "Game of Thrones",
+    "year": "2011",
+    "genre": "Fantasy, Drama",
+    "description": "Noble families vie for control of Westeros.",
+    "image": "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
+  },
+  {
+    "id": 10,
+    "type": "series",
+    "title": "The Mandalorian",
+    "year": "2019",
+    "genre": "Sci-Fi, Adventure",
+    "description": "A bounty hunter travels across the galaxy protecting a mysterious child.",
+    "image": "https://image.tmdb.org/t/p/w500/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"
+  },
+
+  {
+    "id": 12,
+    "type": "movie",
+    "title": "Joker",
+    "year": "2019",
+    "genre": "Crime, Drama",
+    "description": "Arthur Fleck descends into madness and becomes the Joker.",
+    "image": "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
+  },
+  {
+    "id": 13,
+    "type": "series",
+    "title": "Money Heist",
+    "year": "2017",
+    "genre": "Crime, Thriller",
+    "description": "A criminal mastermind plans heists with a team of robbers.",
+    "image": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg"
+  },
+  {
+    "id": 14,
+    "type": "series",
+    "title": "The Boys",
+    "year": "2019",
+    "genre": "Action, Comedy",
+    "description": "A group tries to take down corrupt superheroes.",
+    "image": "https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwCRKptN.jpg"
+  },
+  {
+    "id": 15,
+    "type": "movie",
+    "title": "Parasite",
+    "year": "2019",
+    "genre": "Thriller, Drama",
+    "description": "A poor family schemes to work for a wealthy household.",
+    "image": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+  },
+  {
+    "id": 16,
+    "type": "movie",
+    "title": "Spider-Man: No Way Home",
+    "year": "2021",
+    "genre": "Action, Adventure",
+    "description": "Peter Parker faces multiverse villains.",
+    "image": "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+  }
+]
