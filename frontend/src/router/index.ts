@@ -1,15 +1,28 @@
 import { createRouter, createWebHistory } from "vue-router";
 import MovieList from "../components/MovieList.vue";
 import AddMovie from "../components/AddMovie.vue";
+import Favourites from "../components/FavouritesPage.vue";
+import LoginPage from "../components/LoginPage.vue";
 
 const routes = [
   { path: "/", component: MovieList },
-  { path: "/add", component: AddMovie },
+  { path: "/add", component: AddMovie, meta: { requiresAuth: true } },
+  { path: "/favourites", component: Favourites, meta: { requiresAuth: true } },
+  { path: "/login", component: LoginPage },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem("token");
+  if (to.meta.requiresAuth && !token) {
+    next("/login");
+  } else {
+    next();
+  }
 });
 
 export default router;
