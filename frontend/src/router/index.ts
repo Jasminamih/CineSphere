@@ -1,18 +1,18 @@
 import { createRouter, createWebHistory } from "vue-router";
-import MovieList from "../components/MovieList.vue";
-import AddMovie from "../components/AddMovie.vue";
-import Favourites from "../components/FavouritesPage.vue";
-import LoginPage from "../components/LoginPage.vue";
-import RegisterPage from "../components/RegisterPage.vue"; // 🆕 Add this line
-import MyProfile from "../components/MyProfile.vue"; // 🆕 Add this line
+import MovieList from "../views/MovieList.vue";
+import AddMovie from "../views/AddMovie.vue";
+import Favourites from "../views/FavouritesPage.vue";
+import LoginPage from "../views/LoginPage.vue";
+import RegisterPage from "../views/RegisterPage.vue";
+import MyProfile from "../views/MyProfile.vue";
 
 const routes = [
   { path: "/", component: MovieList },
   { path: "/add", component: AddMovie, meta: { requiresAuth: true } },
   { path: "/favourites", component: Favourites, meta: { requiresAuth: true } },
   { path: "/login", component: LoginPage },
-  { path: "/register", component: RegisterPage }, // 🆕 Add this route
-  { path: "/profile", component: MyProfile}, // 🆕 Add this route
+  { path: "/register", component: RegisterPage },
+  { path: "/profile", component: MyProfile },
 ];
 
 const router = createRouter({
@@ -20,7 +20,7 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   const token = localStorage.getItem("token");
   if (to.meta.requiresAuth && !token) {
     next("/login");

@@ -7,7 +7,6 @@
       </h1>
 
       <form @submit.prevent="handleLogin">
-        <!-- Username -->
         <div class="mb-4">
           <label class="block text-sm font-medium mb-1">Username</label>
           <input
@@ -21,7 +20,6 @@
           </p>
         </div>
 
-        <!-- Password -->
         <div class="mb-4">
           <label class="block text-sm font-medium mb-1">Password</label>
           <input
@@ -35,15 +33,13 @@
           </p>
         </div>
 
-        <!-- Submit -->
         <button
           type="submit"
-  class="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-800 transition font-semibold">
+          class="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-800 transition font-semibold">
           Login
         </button>
       </form>
 
-      <!-- Register Link -->
       <p class="text-gray-400 mt-4 text-center">
         Don’t have an account?
         <router-link to="/register" class="underline hover:text-[#737DEC]">
@@ -88,27 +84,25 @@ const validateForm = () => {
 const handleLogin = async () => {
   if (!validateForm()) return;
 
-try {
-  const res = await axios.post("http://localhost:5000/auth/login", {
-    username: username.value,
-    password: password.value,
-  });
+  try {
+    const res = await axios.post("http://localhost:5000/auth/login", {
+      username: username.value,
+      password: password.value,
+    });
 
-  localStorage.setItem("token", res.data.token);
-  localStorage.setItem("username", res.data.username);
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("username", res.data.username);
 
-  userState.isLoggedIn.value = true;
-  userState.username.value = res.data.username;
+    userState.isLoggedIn.value = true;
+    userState.username.value = res.data.username;
 
-  toast.success(`Welcome back, ${res.data.username}!`, { timeout: 1000 });
+    toast.success(`Welcome back, ${res.data.username}!`, { timeout: 1000 });
 
-  // smooth short delay before redirect
-  setTimeout(() => {
-    router.push("/");
-  }, 300); // 300ms is short but noticeable
-} catch (err:any) {
-  alert(err.response?.data?.message || "Login failed.");
-}
-
+    setTimeout(() => {
+      router.push("/");
+    }, 300);
+  } catch (err: any) {
+    alert(err.response?.data?.message || "Login failed.");
+  }
 };
 </script>

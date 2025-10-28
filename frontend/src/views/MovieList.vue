@@ -1,10 +1,9 @@
 <template>
   <div
     class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
-    <!-- Header + Filters -->
     <div class="mb-6 md:flex md:items-center md:justify-between">
       <h1 class="text-4xl font-bold text-gray-100 mb-4 md:mb-0">
-    Popular Movies
+        Popular Movies
       </h1>
 
       <div class="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
@@ -95,49 +94,14 @@
       </div>
     </div>
 
-    <!-- Movies Grid -->
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <div
+      <MovieCard
         v-for="item in items"
         :key="item.id"
-        class="bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden transform hover:-translate-y-2 flex flex-col">
-        <div class="relative h-56">
-          <img
-            :src="item.image"
-            :alt="item.title"
-            class="w-full h-full object-cover rounded-t-xl" />
-
-          <span
-            class="absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold uppercase"
-            :class="
-              item.type === 'movie'
-                ? 'bg-gray-900 text-white'
-                : 'bg-purple-900 text-white'
-            ">
-            {{ item.type }}
-          </span>
-
-          <!-- Heart Icon -->
-          <button
-            @click="toggleFavourite(item)"
-            class="absolute bottom-2 right-2 transition transform hover:scale-110">
-            <HeartSolid
-              class="w-6 h-6"
-              :class="isFavourite(item.id) ? 'text-red-500' : 'text-white'" />
-          </button>
-        </div>
-
-        <div class="p-4 flex-1 flex flex-col">
-          <h3 class="font-semibold text-lg mb-1 text-gray-50">
-            {{ item.title }} ({{ item.year }})
-          </h3>
-          <p class="text-sm text-gray-400 mb-2">{{ item.genre }}</p>
-          <p class="text-gray-300 min-h-[3rem] text-sm flex-1">
-            {{ item.description }}
-          </p>
-        </div>
-      </div>
+        :item="item"
+        :isFavourite="isFavourite(item.id)"
+        @toggle-favourite="toggleFavourite" />
     </div>
   </div>
 </template>
@@ -145,7 +109,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
-import { HeartIcon as HeartSolid } from "@heroicons/vue/24/solid";
+import MovieCard from "@/components/MovieCard.vue";
 
 interface Item {
   id: number;
@@ -157,7 +121,6 @@ interface Item {
   image: string;
 }
 
-// --- State ---
 const items = ref<Item[]>([]);
 const favourites = ref<Item[]>([]);
 const search = ref("");
@@ -165,11 +128,9 @@ const genreFilter = ref("");
 const typeFilter = ref("");
 const sortBy = ref("");
 
-// --- Auth header ---
 const token = localStorage.getItem("token");
 const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
 
-// --- Fetch items ---
 const fetchItems = async () => {
   const params: any = {};
   if (search.value) params.search = search.value;
@@ -188,7 +149,6 @@ const fetchItems = async () => {
   }
 };
 
-// --- Fetch favourites ---
 const fetchFavourites = async () => {
   try {
     const res = await axios.get<Item[]>(
@@ -201,7 +161,6 @@ const fetchFavourites = async () => {
   }
 };
 
-// --- Favourite handling ---
 const isFavourite = (id: number) => favourites.value.some((f) => f.id === id);
 
 const toggleFavourite = async (item: Item) => {

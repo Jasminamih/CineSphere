@@ -8,7 +8,6 @@
       </h1>
 
       <form @submit.prevent="handleRegister" class="space-y-4">
-        <!-- Username -->
         <div>
           <label class="block text-sm font-medium mb-1 text-gray-200"
             >Username</label
@@ -24,7 +23,6 @@
           </p>
         </div>
 
-        <!-- Email -->
         <div>
           <label class="block text-sm font-medium mb-1 text-gray-200"
             >Email</label
@@ -40,7 +38,6 @@
           </p>
         </div>
 
-        <!-- Password -->
         <div>
           <label class="block text-sm font-medium mb-1 text-gray-200"
             >Password</label
@@ -56,7 +53,6 @@
           </p>
         </div>
 
-        <!-- Confirm Password -->
         <div>
           <label class="block text-sm font-medium mb-1 text-gray-200"
             >Confirm Password</label
@@ -174,6 +170,6 @@ const handleRegister = async () => {
 /* Force mobile input outline to indigo instead of yellow */
 input:focus {
   outline: none;
-  box-shadow: 0 0 0 2px #6366f1; /* Indigo-500 */
+  box-shadow: 0 0 0 2px #6366f1;
 }
 </style>

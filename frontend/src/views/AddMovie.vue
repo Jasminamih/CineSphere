@@ -2,10 +2,11 @@
   <div class="flex flex-col items-center justify-center h-full w-full px-4">
     <div
       class="w-full max-w-sm bg-gradient-to-br from-slate-900 via-blue-gray-800 to-slate-800 p-6 rounded-2xl shadow-xl flex-shrink-0">
-    <h2 class="text-3xl font-bold mb-6 text-center text-indigo-500 flex items-center justify-center gap-2">
-  <PlusIcon class="w-6 h-6" />
-  Add Movie / Series
-</h2>
+      <h2
+        class="text-3xl font-bold mb-6 text-center text-indigo-500 flex items-center justify-center gap-2">
+        <PlusIcon class="w-6 h-6" />
+        Add Movie / Series
+      </h2>
 
       <form @submit.prevent="submitMovie" class="space-y-4">
         <input
@@ -45,12 +46,11 @@
           <option value="series">Series</option>
         </select>
 
-      <button
-  type="submit"
-  class="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-800 transition font-semibold">
-  Add
-</button>
-
+        <button
+          type="submit"
+          class="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-800 transition font-semibold">
+          Add
+        </button>
       </form>
     </div>
   </div>
@@ -61,7 +61,7 @@ import { ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useToast } from "vue-toastification";
-import { PlusIcon } from '@heroicons/vue/24/solid';
+import { PlusIcon } from "@heroicons/vue/24/solid";
 
 const title = ref("");
 const year = ref<number | null>(null);
@@ -73,7 +73,6 @@ const type = ref("");
 const router = useRouter();
 const toast = useToast();
 
-// Get token from localStorage
 const token = localStorage.getItem("token");
 if (!token) {
   toast.error("You must be logged in to add a movie/series.");
@@ -101,7 +100,6 @@ const submitMovie = async () => {
 
     toast.success("Movie/Series added successfully!");
 
-    // Reset form
     title.value = "";
     year.value = null;
     genre.value = "";

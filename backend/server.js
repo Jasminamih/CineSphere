@@ -1,4 +1,3 @@
-// backend/server.js
 import express from "express";
 import cors from "cors";
 import fs from "fs";
@@ -7,14 +6,11 @@ import jwt from "jsonwebtoken";
 
 const app = express();
 const PORT = 5000;
-const JWT_SECRET = "supersecretkey"; // in production, use env vars
+const JWT_SECRET = "supersecretkey";
 
 app.use(cors());
 app.use(express.json());
 
-// --------------------
-// Helper functions
-// --------------------
 const readJSON = (path) => {
   try {
     return JSON.parse(fs.readFileSync(path, "utf-8"));
@@ -27,15 +23,9 @@ const writeJSON = (path, data) => {
   fs.writeFileSync(path, JSON.stringify(data, null, 2));
 };
 
-// --------------------
-// Users (for auth)
-// --------------------
 const usersPath = "./data/users.json";
 let users = readJSON(usersPath);
 
-// --------------------
-// Middleware
-// --------------------
 const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ message: "Missing token" });
@@ -44,8 +34,7 @@ const authenticate = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    // Check if user still exists
-    const userExists = users.find(u => u.id === decoded.userId);
+    const userExists = users.find((u) => u.id === decoded.userId);
     if (!userExists) return res.status(401).json({ message: "User not found" });
 
     req.user = decoded;
@@ -55,10 +44,7 @@ const authenticate = (req, res, next) => {
   }
 };
 
-
-// --------------------
 // Login route
-// --------------------
 app.post("/auth/login", async (req, res) => {
   const { username, password } = req.body;
   const user = users.find((u) => u.username === username);
@@ -73,12 +59,10 @@ app.post("/auth/login", async (req, res) => {
     { expiresIn: "1h" }
   );
 
-  // send both token and username
   res.json({ token, username: user.username });
 });
-// --------------------
+
 // Register route
-// --------------------
 app.post("/auth/register", async (req, res) => {
   const { username, password, email } = req.body;
 
@@ -105,9 +89,7 @@ app.post("/auth/register", async (req, res) => {
   res.status(201).json({ message: "Registration successful" });
 });
 
-// --------------------
 // Movies
-// --------------------
 const dataPath = "./data/movies.json";
 let items = readJSON(dataPath);
 
@@ -170,9 +152,7 @@ app.post("/items", (req, res) => {
   res.status(201).json(newItem);
 });
 
-// --------------------
 // Favourites per user
-// --------------------
 const favouritesPath = "./data/favourites.json";
 let favourites = readJSON(favouritesPath);
 
@@ -215,9 +195,6 @@ app.delete("/favourites/:id", authenticate, (req, res) => {
   res.json({ message: "Removed from favourites", favourites: userFavs });
 });
 
-// --------------------
-// Start server
-// --------------------
 app.listen(PORT, () =>
   console.log(`✅ Server running on http://localhost:${PORT}`)
 );

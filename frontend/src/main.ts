@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import './index.css'; // <- Tailwind
+import "./index.css";
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
