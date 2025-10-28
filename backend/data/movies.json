@@ -1,5 +1,4 @@
 [
-
   {
     "id": 2,
     "type": "movie",
@@ -36,7 +35,6 @@
     "description": "Explorers travel through a wormhole to save humanity.",
     "image": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
   },
- 
   {
     "id": 7,
     "type": "movie",
@@ -73,7 +71,6 @@
     "description": "A bounty hunter travels across the galaxy protecting a mysterious child.",
     "image": "https://image.tmdb.org/t/p/w500/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"
   },
-
   {
     "id": 12,
     "type": "movie",

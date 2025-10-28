@@ -1,35 +1,4 @@
 {
-  "2": [
-    {
-      "id": 3,
-      "type": "series",
-      "title": "Stranger Things",
-      "year": "2016",
-      "genre": "Sci-Fi, Horror",
-      "description": "Kids uncover supernatural mysteries in Hawkins.",
-      "image": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
-    }
-  ],
-  "4": [
-    {
-      "id": 4,
-      "type": "series",
-      "title": "Breaking Bad",
-      "year": "2008",
-      "genre": "Crime, Drama",
-      "description": "A chemistry teacher becomes a meth producer.",
-      "image": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"
-    }
-  ],
-  "user1": [
-    {
-      "id": 3,
-      "type": "series",
-      "title": "Stranger Things",
-      "year": "2016",
-      "genre": "Sci-Fi, Horror",
-      "description": "Kids uncover supernatural mysteries in Hawkins.",
-      "image": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
-    }
-  ]
+  "1": [],
+  "2": []
 }

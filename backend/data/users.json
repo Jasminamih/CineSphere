@@ -1,32 +1,14 @@
 [
   {
     "id": 1,
-    "username": "jasmina",
-    "password": "$2a$10$ZzFltqXf2J.1W3K9Qv7qkO9T7cDROVvQ6R2sQyQzEaS1Z6HrZPTc6"
+    "username": "Jasmina",
+    "email": "jasmina@gmail.com",
+    "password": "$2b$10$P2C4FMXs2shazuT83FKsIOKqdTg8jWabd7XBYK6c9v.kDqbv876Vu"
   },
   {
     "id": 2,
-    "username": "jasmina2",
-    "password": "$2b$10$EK9WHgYwPXhnQ9O/bS181OUA69Rgivigl13AMuRzE89dgUn/fkaPO"
-  },
-  {
-    "id": 3,
-    "username": "Jaci",
-    "password": "$2b$10$Pg1UH3Ur98jG1aJxniLUyuoZk4n51Ls3Aelljkj/6IESfRtTRCT4K"
-  },
-  {
-    "id": 4,
-    "username": "Jas",
-    "password": "$2b$10$4E9aXYnfzQjQ6tRHw4PwkOGjaknX5opmHrM3YFumvmD3fgeei6F5W"
-  },
-  {
-    "id": 5,
     "username": "test",
-    "password": "$2b$10$ruzN2U/OQ3zrqZmJlhBnbOhdmWa.Y0Afm4XtoW0G/hVPYNRez92UC"
-  },
-  {
-    "id": 6,
-    "username": "jaci",
-    "password": "$2b$10$0S3r8qZv9Ua8B87bzNR8gOzwSo3DC6i31gpOUVYpxsokGUqXtYmwC"
+    "email": "test@gmail.com",
+    "password": "$2b$10$3/macfhHTzU4GMWL/bSTe.lutpMdgR5EZ9GnYyqpYF1VrJIRgNZt."
   }
 ]

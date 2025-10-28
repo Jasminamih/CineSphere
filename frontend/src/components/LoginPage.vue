@@ -1,83 +1,114 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-900">
-    <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-md">
-      <h1 class="text-3xl font-bold text-gray-100 mb-6 text-center">
-        {{ isLogin ? 'Login' : 'Register' }}
+  <div class="flex flex-col items-center justify-center h-full w-full px-4">
+    <div
+      class="w-full max-w-sm bg-gradient-to-br from-slate-800 via-blue-gray-600 to-slate-700 p-6 rounded-2xl shadow-md flex-shrink-0">
+      <h1 class="text-2xl font-bold text-center mb-6 text-[#737DEC]">
+        Welcome Back
       </h1>
 
-      <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-        <input
-          v-model="username"
-          type="text"
-          placeholder="Username"
-          class="px-4 py-2 rounded-full bg-gray-700 text-gray-100 focus:outline-none"
-        />
-        <input
-          v-model="password"
-          type="password"
-          placeholder="Password"
-          class="px-4 py-2 rounded-full bg-gray-700 text-gray-100 focus:outline-none"
-        />
+      <form @submit.prevent="handleLogin">
+        <!-- Username -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Username</label>
+          <input
+            v-model="username"
+            type="text"
+            placeholder="Enter your username"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border"
+            :class="usernameError ? 'border-red-500' : 'border-gray-600'" />
+          <p v-if="usernameError" class="text-red-500 text-sm mt-1">
+            {{ usernameError }}
+          </p>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium mb-1">Password</label>
+          <input
+            v-model="password"
+            type="password"
+            placeholder="Enter your password"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border"
+            :class="passwordError ? 'border-red-500' : 'border-gray-600'" />
+          <p v-if="passwordError" class="text-red-500 text-sm mt-1">
+            {{ passwordError }}
+          </p>
+        </div>
+
+        <!-- Submit -->
         <button
           type="submit"
-          class="bg-gray-900 hover:bg-white hover:text-gray-900 text-white py-2 rounded-full font-semibold transition"
-        >
-          {{ isLogin ? 'Login' : 'Register' }}
+  class="w-full bg-gradient-to-r from-indigo-500 to-indigo-700 text-white py-2 rounded-lg hover:from-indigo-600 hover:to-indigo-800 transition font-semibold">
+          Login
         </button>
       </form>
 
+      <!-- Register Link -->
       <p class="text-gray-400 mt-4 text-center">
-        <span @click="isLogin = !isLogin" class="cursor-pointer underline">
-          {{ isLogin ? 'Create account?' : 'Already have an account?' }}
-        </span>
+        Don’t have an account?
+        <router-link to="/register" class="underline hover:text-[#737DEC]">
+          Register
+        </router-link>
       </p>
     </div>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { ref } from "vue";
 import axios from "axios";
-import router from "../router";
-import { userState } from "../UserState"; // global reactive state
+import { useRouter } from "vue-router";
+import { userState } from "../UserState";
+import { useToast } from "vue-toastification";
 
-export default defineComponent({
-  setup() {
-    const username = ref("");
-    const password = ref("");
-    const isLogin = ref(true);
+const username = ref("");
+const password = ref("");
+const usernameError = ref("");
+const passwordError = ref("");
+const router = useRouter();
+const toast = useToast();
 
-    const handleSubmit = async () => {
-      try {
-        if (isLogin.value) {
-          const res = await axios.post("http://localhost:5000/auth/login", {
-            username: username.value,
-            password: password.value,
-          });
+const validateForm = () => {
+  usernameError.value = "";
+  passwordError.value = "";
+  let valid = true;
 
-          // Save token and username in localStorage
-          localStorage.setItem("token", res.data.token);
-          localStorage.setItem("username", res.data.username);
+  if (!username.value.trim()) {
+    usernameError.value = "Username is required.";
+    valid = false;
+  }
 
-          // Update global reactive state
-          userState.isLoggedIn.value = true;
-          userState.username.value = res.data.username;
+  if (!password.value.trim()) {
+    passwordError.value = "Password is required.";
+    valid = false;
+  }
 
-          router.push("/"); // go to home
-        } else {
-          await axios.post("http://localhost:5000/auth/register", {
-            username: username.value,
-            password: password.value,
-          });
-          alert("Registration successful! You can now login.");
-          isLogin.value = true;
-        }
-      } catch (err: any) {
-        alert(err.response?.data?.message || "Error");
-      }
-    };
+  return valid;
+};
 
-    return { username, password, isLogin, handleSubmit };
-  },
-});
+const handleLogin = async () => {
+  if (!validateForm()) return;
+
+try {
+  const res = await axios.post("http://localhost:5000/auth/login", {
+    username: username.value,
+    password: password.value,
+  });
+
+  localStorage.setItem("token", res.data.token);
+  localStorage.setItem("username", res.data.username);
+
+  userState.isLoggedIn.value = true;
+  userState.username.value = res.data.username;
+
+  toast.success(`Welcome back, ${res.data.username}!`, { timeout: 1000 });
+
+  // smooth short delay before redirect
+  setTimeout(() => {
+    router.push("/");
+  }, 300); // 300ms is short but noticeable
+} catch (err:any) {
+  alert(err.response?.data?.message || "Login failed.");
+}
+
+};
 </script>

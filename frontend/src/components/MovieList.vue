@@ -1,98 +1,141 @@
 <template>
-  <div class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gray-800 rounded-lg shadow-xl mt-8 mb-8">
+  <div
+    class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
+    <!-- Header + Filters -->
     <div class="mb-6 md:flex md:items-center md:justify-between">
-      <h1 class="text-4xl font-bold text-gray-100 mb-4 md:mb-0">🎬 Popular Movies</h1>
+      <h1 class="text-4xl font-bold text-gray-100 mb-4 md:mb-0">
+    Popular Movies
+      </h1>
 
-    <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-  <input
-    v-model="search"
-    type="text"
-    placeholder="Search by title..."
-    class="px-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 placeholder-gray-400 transition"
-  />
+      <div class="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
+        <!-- Search -->
+        <input
+          v-model="search"
+          type="text"
+          placeholder="Search by title..."
+          class="px-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-600 transition w-full sm:w-auto" />
 
-  <!-- Genre Filter -->
-  <div class="relative w-full sm:w-auto">
-    <select
-      v-model="genreFilter"
-      class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-    >
-      <option value="">All Genres</option>
-      <option value="Action">Action</option>
-      <option value="Comedy">Comedy</option>
-      <option value="Drama">Drama</option>
-      <option value="Sci-Fi">Sci-Fi</option>
-    </select>
-    <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-      <svg class="h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
+        <!-- Genre Filter -->
+        <div class="relative w-full sm:w-auto">
+          <select
+            v-model="genreFilter"
+            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <option value="">All Genres</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+            <svg
+              class="h-4 w-4 text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Type Filter -->
+        <div class="relative w-full sm:w-auto">
+          <select
+            v-model="typeFilter"
+            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <option value="">All Types</option>
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+            <svg
+              class="h-4 w-4 text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Sort Filter -->
+        <div class="relative w-full sm:w-auto">
+          <select
+            v-model="sortBy"
+            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            <option value="">Sort By</option>
+            <option value="title">Title</option>
+            <option value="year">Year</option>
+            <option value="type">Type</option>
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
+            <svg
+              class="h-4 w-4 text-gray-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <!-- Type Filter -->
-  <div class="relative w-full sm:w-auto">
-    <select
-      v-model="typeFilter"
-      class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-    >
-      <option value="">All Types</option>
-      <option value="movie">Movie</option>
-      <option value="series">Series</option>
-    </select>
-    <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-      <svg class="h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </div>
-  </div>
-
-  <!-- Sort Filter -->
-  <div class="relative w-full sm:w-auto">
-    <select
-      v-model="sortBy"
-      class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-    >
-      <option value="">Sort By</option>
-      <option value="title">Title</option>
-      <option value="year">Year</option>
-      <option value="type">Type</option>
-    </select>
-    <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
-      <svg class="h-4 w-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-      </svg>
-    </div>
-  </div>
-</div>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <!-- Movies Grid -->
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div
         v-for="item in items"
         :key="item.id"
-        class="bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden transform hover:-translate-y-2 flex flex-col"
-      >
+        class="bg-gray-700 rounded-xl shadow-lg hover:shadow-2xl transition overflow-hidden transform hover:-translate-y-2 flex flex-col">
         <div class="relative h-56">
-          <img :src="item.image" :alt="item.title" class="w-full h-full object-cover rounded-t-xl" />
+          <img
+            :src="item.image"
+            :alt="item.title"
+            class="w-full h-full object-cover rounded-t-xl" />
+
           <span
             class="absolute top-2 right-2 px-3 py-1 rounded-full text-xs font-semibold uppercase"
-            :class="item.type === 'movie' ? 'bg-indigo-500 text-white' : 'bg-purple-500 text-white'"
-          >
+            :class="
+              item.type === 'movie'
+                ? 'bg-gray-900 text-white'
+                : 'bg-purple-900 text-white'
+            ">
             {{ item.type }}
           </span>
+
+          <!-- Heart Icon -->
           <button
             @click="toggleFavourite(item)"
-            class="absolute bottom-2 right-2 text-2xl transition transform hover:scale-110"
-          >
-            <span v-if="isFavourite(item.id)">❤️</span>
-            <span v-else>🤍</span>
+            class="absolute bottom-2 right-2 transition transform hover:scale-110">
+            <HeartSolid
+              class="w-6 h-6"
+              :class="isFavourite(item.id) ? 'text-red-500' : 'text-white'" />
           </button>
         </div>
+
         <div class="p-4 flex-1 flex flex-col">
-          <h3 class="font-semibold text-lg mb-1 text-gray-50">{{ item.title }} ({{ item.year }})</h3>
+          <h3 class="font-semibold text-lg mb-1 text-gray-50">
+            {{ item.title }} ({{ item.year }})
+          </h3>
           <p class="text-sm text-gray-400 mb-2">{{ item.genre }}</p>
-          <p class="text-gray-300 text-sm flex-1">{{ item.description }}</p>
+          <p class="text-gray-300 min-h-[3rem] text-sm flex-1">
+            {{ item.description }}
+          </p>
         </div>
       </div>
     </div>
@@ -102,6 +145,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
+import { HeartIcon as HeartSolid } from "@heroicons/vue/24/solid";
 
 interface Item {
   id: number;
@@ -136,7 +180,7 @@ const fetchItems = async () => {
   try {
     const res = await axios.get<Item[]>("http://localhost:5000/items", {
       params,
-      headers: { Authorization: `Bearer ${token}` }, // ✅ Add this
+      headers: { Authorization: `Bearer ${token}` },
     });
     items.value = res.data;
   } catch (err) {
@@ -144,11 +188,13 @@ const fetchItems = async () => {
   }
 };
 
-
 // --- Fetch favourites ---
 const fetchFavourites = async () => {
   try {
-    const res = await axios.get<Item[]>("http://localhost:5000/favourites", axiosConfig);
+    const res = await axios.get<Item[]>(
+      "http://localhost:5000/favourites",
+      axiosConfig
+    );
     favourites.value = res.data;
   } catch (err) {
     console.error("Error fetching favourites:", err);
@@ -156,13 +202,16 @@ const fetchFavourites = async () => {
 };
 
 // --- Favourite handling ---
-const isFavourite = (id: number) => favourites.value.some(f => f.id === id);
+const isFavourite = (id: number) => favourites.value.some((f) => f.id === id);
 
 const toggleFavourite = async (item: Item) => {
   try {
     if (isFavourite(item.id)) {
-      await axios.delete(`http://localhost:5000/favourites/${item.id}`, axiosConfig);
-      favourites.value = favourites.value.filter(f => f.id !== item.id);
+      await axios.delete(
+        `http://localhost:5000/favourites/${item.id}`,
+        axiosConfig
+      );
+      favourites.value = favourites.value.filter((f) => f.id !== item.id);
     } else {
       await axios.post("http://localhost:5000/favourites", item, axiosConfig);
       favourites.value.push(item);
@@ -179,7 +228,3 @@ onMounted(() => {
   fetchFavourites();
 });
 </script>
-
-<style scoped>
-/* You can customize hover effects, transitions, or grid spacing here if needed */
-</style>
