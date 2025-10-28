@@ -1,119 +1,123 @@
 [
   {
-    "id": 2,
+    "id": 1,
     "type": "movie",
     "title": "The Dark Knight",
     "year": "2008",
     "genre": "Action, Crime",
-    "description": "Batman faces the Joker in Gotham City.",
+    "description": "Batman faces the Joker, a criminal mastermind who wreaks havoc on Gotham City, forcing Batman to confront his own moral limits and the chaos that challenges justice and order.",
     "image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
   },
   {
-    "id": 3,
+    "id": 2,
     "type": "series",
     "title": "Stranger Things",
     "year": "2016",
     "genre": "Sci-Fi, Horror",
-    "description": "Kids uncover supernatural mysteries in Hawkins.",
+    "description": "In the quiet town of Hawkins, a group of kids uncover a series of supernatural mysteries, including a girl with psychokinetic abilities and a terrifying parallel dimension called the Upside Down.",
     "image": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
   },
   {
-    "id": 4,
+    "id": 3,
     "type": "series",
     "title": "Breaking Bad",
     "year": "2008",
     "genre": "Crime, Drama",
-    "description": "A chemistry teacher becomes a meth producer.",
+    "description": "High school chemistry teacher Walter White turns to producing methamphetamine after a terminal cancer diagnosis, descending into a dark world of crime, power struggles, and moral corruption.",
     "image": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg"
   },
   {
-    "id": 5,
-    "type": "movie",
-    "title": "Interstellar",
-    "year": "2014",
-    "genre": "Sci-Fi, Adventure",
-    "description": "Explorers travel through a wormhole to save humanity.",
-    "image": "https://image.tmdb.org/t/p/w500/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg"
-  },
-  {
-    "id": 7,
-    "type": "movie",
-    "title": "The Matrix",
-    "year": "1999",
-    "genre": "Sci-Fi, Action",
-    "description": "A hacker discovers reality is a simulation.",
-    "image": "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
-  },
-  {
-    "id": 8,
+    "id": 4,
     "type": "movie",
     "title": "Avengers: Endgame",
     "year": "2019",
     "genre": "Action, Adventure",
-    "description": "The Avengers try to undo Thanos’ destruction.",
+    "description": "After the devastating events of Infinity War, the remaining Avengers unite to reverse Thanos’ destruction, embarking on a time-traveling quest filled with epic battles, emotional stakes, and heroic sacrifices.",
     "image": "https://image.tmdb.org/t/p/w500/or06FN3Dka5tukK1e9sl16pB3iy.jpg"
   },
   {
-    "id": 9,
+    "id": 5,
     "type": "series",
     "title": "Game of Thrones",
     "year": "2011",
     "genre": "Fantasy, Drama",
-    "description": "Noble families vie for control of Westeros.",
+    "description": "In the Seven Kingdoms of Westeros, noble families vie for power, while an ancient threat returns from beyond the Wall. Intrigue, betrayal, and warfare shape the fate of the realm.",
     "image": "https://image.tmdb.org/t/p/w500/u3bZgnGQ9T01sWNhyveQz0wH0Hl.jpg"
   },
   {
-    "id": 10,
-    "type": "series",
-    "title": "The Mandalorian",
-    "year": "2019",
-    "genre": "Sci-Fi, Adventure",
-    "description": "A bounty hunter travels across the galaxy protecting a mysterious child.",
-    "image": "https://image.tmdb.org/t/p/w500/sWgBv7LV2PRoQgkxwlibdGXKz1S.jpg"
-  },
-  {
-    "id": 12,
+    "id": 6,
     "type": "movie",
     "title": "Joker",
     "year": "2019",
     "genre": "Crime, Drama",
-    "description": "Arthur Fleck descends into madness and becomes the Joker.",
+    "description": "Arthur Fleck, a struggling comedian in Gotham City, faces social rejection, mental illness, and a cruel society, ultimately descending into madness to become the infamous criminal known as the Joker.",
     "image": "https://image.tmdb.org/t/p/w500/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"
   },
+
   {
-    "id": 13,
+    "id": 7,
+    "type": "movie",
+    "title": "10 Things I Hate About You",
+    "year": "1999",
+    "genre": "Romance, Comedy, Teen",
+    "description": "A modern adaptation of Shakespeare’s 'The Taming of the Shrew' where a new student schemes to date the fiery Kat Stratford.",
+    "image": "/images/10-Things.jpg"
+  },
+  {
+    "id": 8,
+    "type": "movie",
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "year": "2001",
+    "genre": "Fantasy, Adventure",
+    "description": "Young Harry discovers he is a wizard and attends Hogwarts, where he begins to uncover the secrets of his past.",
+    "image": "/images/harry_potter.jpg"
+  },
+  
+ 
+  {
+    "id": 24,
     "type": "series",
-    "title": "Money Heist",
+    "title": "La Casa de Papel (Money Heist)",
     "year": "2017",
     "genre": "Crime, Thriller",
-    "description": "A criminal mastermind plans heists with a team of robbers.",
+    "description": "A criminal mastermind gathers a team to pull off the biggest heist in Spain’s history, targeting the Royal Mint of Spain.",
     "image": "https://image.tmdb.org/t/p/w500/reEMJA1uzscCbkpeRJeTT2bjqUp.jpg"
   },
+  
   {
-    "id": 14,
-    "type": "series",
-    "title": "The Boys",
-    "year": "2019",
-    "genre": "Action, Comedy",
-    "description": "A group tries to take down corrupt superheroes.",
-    "image": "https://image.tmdb.org/t/p/w500/mY7SeH4HFFxW1hiI6cWuwCRKptN.jpg"
+    "id": 27,
+    "type": "movie",
+    "title": "Frozen",
+    "year": "2013",
+    "genre": "Animation, Family, Adventure",
+    "description": "Princess Elsa possesses magical ice powers and accidentally traps her kingdom in eternal winter, forcing her sister Anna to set things right.",
+    "image": "https://image.tmdb.org/t/p/w500/pjeMs3yqRmFL3giJy4PMXWZTTPa.jpg"
   },
   {
-    "id": 15,
+    "id": 28,
     "type": "movie",
-    "title": "Parasite",
-    "year": "2019",
-    "genre": "Thriller, Drama",
-    "description": "A poor family schemes to work for a wealthy household.",
-    "image": "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg"
+    "title": "Beauty and the Beast",
+    "year": "2017",
+    "genre": "Family, Romance, Fantasy",
+    "description": "Belle, a bright young woman, discovers love and courage when she meets the mysterious Beast who holds a magical secret.",
+    "image": "https://image.tmdb.org/t/p/w500/tWqifoYuwLETmmasnGHO7xBjEtt.jpg"
   },
   {
-    "id": 16,
+    "id": 29,
     "type": "movie",
-    "title": "Spider-Man: No Way Home",
-    "year": "2021",
-    "genre": "Action, Adventure",
-    "description": "Peter Parker faces multiverse villains.",
-    "image": "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg"
+    "title": "The Lion King",
+    "year": "2019",
+    "genre": "Animation, Adventure, Drama",
+    "description": "Simba, a young lion prince, must embrace his destiny and reclaim his throne after the murder of his father by his uncle Scar.",
+    "image": "https://image.tmdb.org/t/p/w500/2bXbqYdUdNVa8VIWXVfclP2ICtT.jpg"
+  },
+  {
+    "id": 30,
+    "type": "movie",
+    "title": "Aladdin",
+    "year": "2019",
+    "genre": "Adventure, Fantasy, Romance",
+    "description": "Aladdin discovers a magical lamp and teams up with a spirited genie to win the heart of Princess Jasmine while thwarting a power-hungry sorcerer.",
+    "image": "https://image.tmdb.org/t/p/w500/3iYQTLGoy7QnjcUYRJy4YrAgGvp.jpg"
   }
 ]
