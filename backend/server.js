@@ -3,10 +3,14 @@ import cors from "cors";
 import fs from "fs";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
-const PORT = 5000;
-const JWT_SECRET = "supersecretkey";
+
+
+const PORT = process.env.PORT || 5000;
+const JWT_SECRET = process.env.JWT_SECRET;
+
 
 app.use(cors());
 app.use(express.json());
