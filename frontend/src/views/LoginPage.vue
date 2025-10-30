@@ -80,12 +80,13 @@ const validateForm = () => {
 
   return valid;
 };
+const API_URL = import.meta.env.VITE_API_URL;
 
 const handleLogin = async () => {
   if (!validateForm()) return;
 
   try {
-    const res = await axios.post("http://localhost:5000/auth/login", {
+    const res = await axios.post(`${API_URL}/auth/login`, {
       username: username.value,
       password: password.value,
     });

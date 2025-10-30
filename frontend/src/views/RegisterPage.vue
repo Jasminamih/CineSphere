@@ -144,12 +144,13 @@ const validateForm = () => {
 
   return valid;
 };
+const API_URL = import.meta.env.VITE_API_URL;
 
 const handleRegister = async () => {
   if (!validateForm()) return;
 
   try {
-    await axios.post("http://localhost:5000/auth/register", {
+    await axios.post(`${API_URL}/auth/register`, {
       username: username.value,
       email: email.value,
       password: password.value,

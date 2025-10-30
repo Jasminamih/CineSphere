@@ -131,6 +131,8 @@ const sortBy = ref("");
 const token = localStorage.getItem("token");
 const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const fetchItems = async () => {
   const params: any = {};
   if (search.value) params.search = search.value;
@@ -139,7 +141,7 @@ const fetchItems = async () => {
   if (sortBy.value) params.sort = sortBy.value;
 
   try {
-    const res = await axios.get<Item[]>("http://localhost:5000/items", {
+    const res = await axios.get<Item[]>(`${API_URL}/items`, {
       params,
       headers: { Authorization: `Bearer ${token}` },
     });
@@ -152,7 +154,7 @@ const fetchItems = async () => {
 const fetchFavourites = async () => {
   try {
     const res = await axios.get<Item[]>(
-      "http://localhost:5000/favourites",
+      `${API_URL}/favourites`,
       axiosConfig
     );
     favourites.value = res.data;
@@ -167,12 +169,12 @@ const toggleFavourite = async (item: Item) => {
   try {
     if (isFavourite(item.id)) {
       await axios.delete(
-        `http://localhost:5000/favourites/${item.id}`,
+        `${API_URL}/favourites/${item.id}`,
         axiosConfig
       );
       favourites.value = favourites.value.filter((f) => f.id !== item.id);
     } else {
-      await axios.post("http://localhost:5000/favourites", item, axiosConfig);
+      await axios.post(`${API_URL}/favourites`, item, axiosConfig);
       favourites.value.push(item);
     }
   } catch (err) {

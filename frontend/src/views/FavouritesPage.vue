@@ -50,11 +50,12 @@ const token = localStorage.getItem("token");
 if (!token) router.push("/login");
 
 const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
+const API_URL = import.meta.env.VITE_API_URL;
 
 const fetchFavourites = async () => {
   try {
     const res = await axios.get<Item[]>(
-      "http://localhost:5000/favourites",
+      `${API_URL}/favourites`,
       axiosConfig
     );
     favourites.value = res.data;
@@ -74,7 +75,7 @@ const fetchFavourites = async () => {
 const removeFavourite = async (item: Item) => {
   try {
     await axios.delete(
-      `http://localhost:5000/favourites/${item.id}`,
+      `${API_URL}/favourites/${item.id}`,
       axiosConfig
     );
     favourites.value = favourites.value.filter((f) => f.id !== item.id);

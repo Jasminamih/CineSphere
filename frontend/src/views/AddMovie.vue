@@ -72,6 +72,7 @@ const type = ref("");
 
 const router = useRouter();
 const toast = useToast();
+const API_URL = import.meta.env.VITE_API_URL;
 
 const token = localStorage.getItem("token");
 if (!token) {
@@ -86,7 +87,7 @@ const axiosConfig = {
 const submitMovie = async () => {
   try {
     await axios.post(
-      "http://localhost:5000/items",
+      `${API_URL}/items`,
       {
         title: title.value,
         year: year.value,
