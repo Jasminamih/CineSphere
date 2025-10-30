@@ -83,7 +83,7 @@ app.post("/auth/register", async (req, res) => {
   const newUser = {
     id: users.length > 0 ? users[users.length - 1].id + 1 : 1,
     username,
-    email, // store email
+    email, 
     password: hashedPassword,
   };
 
