@@ -60,7 +60,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed, ref } from "vue";
+import { defineProps, defineEmits, ref } from "vue";
 import { HeartIcon as HeartSolid } from "@heroicons/vue/24/solid";
 import { userState } from "../UserState";
 

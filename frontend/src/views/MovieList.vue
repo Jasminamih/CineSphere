@@ -1,24 +1,26 @@
 <template>
   <div
-    class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
-    <div class="mb-6 md:flex md:items-center md:justify-between">
-      <h1 class="text-4xl font-bold text-gray-100 mb-4 md:mb-0">
-        Popular Movies
+    class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
+    <div
+      class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8 mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-100">
+        Browse Movies & Series
       </h1>
 
+      <!-- Filters -->
       <div class="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
         <!-- Search -->
         <input
           v-model="search"
           type="text"
           placeholder="Search by title..."
-          class="px-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-600 transition w-full sm:w-auto" />
+          class="px-5 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition w-full sm:w-64" />
 
         <!-- Genre Filter -->
-        <div class="relative w-full sm:w-auto">
+        <div class="relative w-full sm:w-48">
           <select
             v-model="genreFilter"
-            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">All Genres</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>
@@ -28,7 +30,7 @@
           <div
             class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
             <svg
-              class="h-4 w-4 text-gray-300"
+              class="h-4 w-4 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24">
@@ -42,10 +44,10 @@
         </div>
 
         <!-- Type Filter -->
-        <div class="relative w-full sm:w-auto">
+        <div class="relative w-full sm:w-40">
           <select
             v-model="typeFilter"
-            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">All Types</option>
             <option value="movie">Movie</option>
             <option value="series">Series</option>
@@ -53,7 +55,7 @@
           <div
             class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
             <svg
-              class="h-4 w-4 text-gray-300"
+              class="h-4 w-4 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24">
@@ -67,10 +69,10 @@
         </div>
 
         <!-- Sort Filter -->
-        <div class="relative w-full sm:w-auto">
+        <div class="relative w-full sm:w-40">
           <select
             v-model="sortBy"
-            class="appearance-none w-full pr-10 pl-4 py-2 rounded-full border border-gray-600 bg-gray-700 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">Sort By</option>
             <option value="title">Title</option>
             <option value="year">Year</option>
@@ -79,7 +81,7 @@
           <div
             class="pointer-events-none absolute inset-y-0 right-3 flex items-center">
             <svg
-              class="h-4 w-4 text-gray-300"
+              class="h-4 w-4 text-gray-400"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24">
@@ -94,14 +96,21 @@
       </div>
     </div>
 
+    <!-- Movie grid -->
     <div
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      <MovieCard
-        v-for="item in items"
-        :key="item.id"
-        :item="item"
-        :isFavourite="isFavourite(item.id)"
-        @toggle-favourite="toggleFavourite" />
+      <template v-if="items.length > 0">
+        <MovieCard
+          v-for="item in items"
+          :key="item.id"
+          :item="item"
+          :isFavourite="isFavourite(item.id)"
+          @toggle-favourite="toggleFavourite" />
+      </template>
+
+      <div v-else class="col-span-full text-center text-gray-300 text-lg py-10">
+        Oops! No movies found. Try a different title, genre, or type.
+      </div>
     </div>
   </div>
 </template>
@@ -153,10 +162,7 @@ const fetchItems = async () => {
 
 const fetchFavourites = async () => {
   try {
-    const res = await axios.get<Item[]>(
-      `${API_URL}/favourites`,
-      axiosConfig
-    );
+    const res = await axios.get<Item[]>(`${API_URL}/favourites`, axiosConfig);
     favourites.value = res.data;
   } catch (err) {
     console.error("Error fetching favourites:", err);
@@ -168,10 +174,7 @@ const isFavourite = (id: number) => favourites.value.some((f) => f.id === id);
 const toggleFavourite = async (item: Item) => {
   try {
     if (isFavourite(item.id)) {
-      await axios.delete(
-        `${API_URL}/favourites/${item.id}`,
-        axiosConfig
-      );
+      await axios.delete(`${API_URL}/favourites/${item.id}`, axiosConfig);
       favourites.value = favourites.value.filter((f) => f.id !== item.id);
     } else {
       await axios.post(`${API_URL}/favourites`, item, axiosConfig);
