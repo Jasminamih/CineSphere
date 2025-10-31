@@ -4,6 +4,7 @@ import pg from "pg";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -194,6 +195,14 @@ app.delete("/favourites/:id", authenticate, async (req, res) => {
   }
 });
 
+
+// Serve frontend build
+app.use(express.static(path.join(__dirname, "build")));
+
+// React Router fallback
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 // ----------------------
 // Start server
 // ----------------------
