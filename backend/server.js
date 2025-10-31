@@ -203,9 +203,10 @@ app.delete("/favourites/:id", authenticate, async (req, res) => {
 app.use(express.static(path.join(__dirname, "build")));
 
 // React Router fallback
-app.get("*", (req, res) => { // <-- Must be "*"
-  res.sendFile(path.join(__dirname, "build", "index.html"));
+app.get("/:path(.*)", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+
 // ----------------------
 // Start server
 // ----------------------
