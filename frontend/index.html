@@ -2,9 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo2.png" />
+    <link rel="icon" href="/logo.png" type="image/png" />
+    <link rel="preload" href="/logo.webp" as="image" type="image/webp" />
+    <link
+      rel="preload"
+      href="https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg"
+      as="image"
+      type="image/jpeg"
+      fetchpriority="high" />
+    <link rel="modulepreload" href="/src/main.ts" />
+    <link rel="preconnect" href="https://image.tmdb.org" crossorigin />
+    <link
+      rel="preconnect"
+      href="https://my-cinesphere.onrender.com"
+      crossorigin />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CineSphere</title>
+    <meta
+      name="description"
+      content="CineSphere – Browse and keep track of your favourite movies and series." />
   </head>
   <body>
     <div id="app"></div>

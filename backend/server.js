@@ -30,8 +30,11 @@ const authenticate = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
 
-    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [decoded.userId]);
-    if (rows.length === 0) return res.status(401).json({ message: "User not found" });
+    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
+      decoded.userId,
+    ]);
+    if (rows.length === 0)
+      return res.status(401).json({ message: "User not found" });
 
     req.user = decoded;
     next();
@@ -46,10 +49,15 @@ const authenticate = async (req, res, next) => {
 app.post("/auth/register", async (req, res) => {
   const { username, password, email } = req.body;
   if (!username || !password || !email)
-    return res.status(400).json({ message: "Username, email, and password required" });
+    return res
+      .status(400)
+      .json({ message: "Username, email, and password required" });
 
-  const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
-  if (rows.length > 0) return res.status(400).json({ message: "Username already exists" });
+  const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [
+    username,
+  ]);
+  if (rows.length > 0)
+    return res.status(400).json({ message: "Username already exists" });
 
   const hashedPassword = await bcrypt.hash(password, 10);
   await pool.query(
@@ -62,14 +70,20 @@ app.post("/auth/register", async (req, res) => {
 
 app.post("/auth/login", async (req, res) => {
   const { username, password } = req.body;
-  const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [username]);
+  const { rows } = await pool.query("SELECT * FROM users WHERE username = $1", [
+    username,
+  ]);
   const user = rows[0];
   if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) return res.status(401).json({ message: "Invalid credentials" });
 
-  const token = jwt.sign({ userId: user.id, username: user.username }, JWT_SECRET, { expiresIn: "1h" });
+  const token = jwt.sign(
+    { userId: user.id, username: user.username },
+    JWT_SECRET,
+    { expiresIn: "1d" }
+  );
   res.json({ token, username: user.username });
 });
 
@@ -97,12 +111,22 @@ app.get("/items", async (req, res) => {
     }
     if (conditions.length > 0) query += " WHERE " + conditions.join(" AND ");
 
-    if (sort) {
-      const allowed = ["title", "type", "year"];
-      if (allowed.includes(sort)) query += ` ORDER BY ${sort}`;
+    // ✅ Always order by order_index first, then optional sort, then id
+    const allowed = ["title", "type", "year"];
+    if (sort && allowed.includes(sort)) {
+      query += ` ORDER BY order_index ASC, ${sort} ASC, id ASC`;
+    } else {
+      query += ` ORDER BY order_index ASC, id ASC`;
     }
-
+    // Add limit & offset if provided
+    if (limit) query += ` LIMIT ${parseInt(limit as string)}`;
+    if (offset) query += ` OFFSET ${parseInt(offset as string)}`;
     const { rows } = await pool.query(query, values);
+    console.log(
+      "Order check:",
+      rows.map((r) => [r.title, r.order_index])
+    );
+
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -112,8 +136,11 @@ app.get("/items", async (req, res) => {
 app.get("/items/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   try {
-    const { rows } = await pool.query("SELECT * FROM movies WHERE id = $1", [id]);
-    if (rows.length === 0) return res.status(404).json({ message: "Not found" });
+    const { rows } = await pool.query("SELECT * FROM movies WHERE id = $1", [
+      id,
+    ]);
+    if (rows.length === 0)
+      return res.status(404).json({ message: "Not found" });
     res.json(rows[0]);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -155,7 +182,10 @@ app.delete("/favourites/:id", authenticate, async (req, res) => {
   const user_id = req.user.userId;
 
   try {
-    await pool.query("DELETE FROM favourites WHERE user_id = $1 AND movie_id = $2", [user_id, movie_id]);
+    await pool.query(
+      "DELETE FROM favourites WHERE user_id = $1 AND movie_id = $2",
+      [user_id, movie_id]
+    );
     res.json({ message: "Removed from favourites" });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
@@ -165,4 +195,6 @@ app.delete("/favourites/:id", authenticate, async (req, res) => {
 // ----------------------
 // Start server
 // ----------------------
-app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
+app.listen(PORT, () =>
+  console.log(`✅ Server running on http://localhost:${PORT}`)
+);

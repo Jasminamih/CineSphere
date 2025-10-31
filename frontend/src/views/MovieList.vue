@@ -3,9 +3,9 @@
     class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
     <div
       class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8 mb-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-100">
+      <h2 class="text-3xl sm:text-4xl font-bold text-gray-50">
         Browse Movies & Series
-      </h1>
+      </h2>
 
       <!-- Filters -->
       <div class="flex flex-col sm:flex-row gap-3 md:gap-4 w-full sm:w-auto">
@@ -14,13 +14,14 @@
           v-model="search"
           type="text"
           placeholder="Search by title..."
-          class="px-5 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition w-full sm:w-64" />
+          class="px-5 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition w-full sm:w-64" />
 
         <!-- Genre Filter -->
         <div class="relative w-full sm:w-48">
           <select
             v-model="genreFilter"
-            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
+            aria-label="Genre"
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">All Genres</option>
             <option value="Action">Action</option>
             <option value="Comedy">Comedy</option>
@@ -47,7 +48,8 @@
         <div class="relative w-full sm:w-40">
           <select
             v-model="typeFilter"
-            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
+            aria-label="Type"
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">All Types</option>
             <option value="movie">Movie</option>
             <option value="series">Series</option>
@@ -71,8 +73,9 @@
         <!-- Sort Filter -->
         <div class="relative w-full sm:w-40">
           <select
+            aria-label="Sort By"
             v-model="sortBy"
-            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
+            class="appearance-none w-full px-4 py-2 rounded-full border border-gray-600 bg-gray-800 text-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-gray-700 transition">
             <option value="">Sort By</option>
             <option value="title">Title</option>
             <option value="year">Year</option>
@@ -101,10 +104,12 @@
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <template v-if="items.length > 0">
         <MovieCard
-          v-for="item in items"
+          v-for="(item, index) in items"
           :key="item.id"
           :item="item"
           :isFavourite="isFavourite(item.id)"
+          :loading="index === 0 ? 'eager' : 'lazy'"
+          :is-first="index === 0"
           @toggle-favourite="toggleFavourite" />
       </template>
 
@@ -128,6 +133,7 @@ interface Item {
   genre: string;
   description: string;
   image: string;
+  order_index: number;
 }
 
 const items = ref<Item[]>([]);
@@ -141,6 +147,9 @@ const token = localStorage.getItem("token");
 const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
 
 const API_URL = import.meta.env.VITE_API_URL;
+const initialItems = ref<Item[]>([]);
+const remainingItems = ref<Item[]>([]);
+const isLoadingRest = ref(false);
 
 const fetchItems = async () => {
   const params: any = {};
@@ -150,17 +159,31 @@ const fetchItems = async () => {
   if (sortBy.value) params.sort = sortBy.value;
 
   try {
-    const res = await axios.get<Item[]>(`${API_URL}/items`, {
-      params,
+    // Step 1: fetch first 4 movies
+    const resFirst = await axios.get<Item[]>(`${API_URL}/items`, {
+      params: { ...params, limit: 4 },
       headers: { Authorization: `Bearer ${token}` },
     });
-    items.value = res.data;
+    initialItems.value = resFirst.data;
+    items.value = [...initialItems.value];
+
+    // Step 2: fetch remaining movies in background
+    isLoadingRest.value = true;
+    const resRest = await axios.get<Item[]>(`${API_URL}/items`, {
+      params: { ...params, offset: 4 },
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    remainingItems.value = resRest.data;
+    items.value = [...initialItems.value, ...remainingItems.value];
+    isLoadingRest.value = false;
   } catch (err) {
     console.error("Error fetching items:", err);
   }
 };
 
 const fetchFavourites = async () => {
+  if (!token) return; // skip if user not logged in
+
   try {
     const res = await axios.get<Item[]>(`${API_URL}/favourites`, axiosConfig);
     favourites.value = res.data;

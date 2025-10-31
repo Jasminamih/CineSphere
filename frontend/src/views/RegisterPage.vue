@@ -16,7 +16,7 @@
             v-model="username"
             type="text"
             placeholder="Enter your username"
-            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-100"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-50"
             :class="usernameError ? 'border-red-500' : 'border-gray-600'" />
           <p v-if="usernameError" class="text-red-500 text-sm mt-1">
             {{ usernameError }}
@@ -31,7 +31,7 @@
             v-model="email"
             type="email"
             placeholder="Enter your email"
-            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-100"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-50"
             :class="emailError ? 'border-red-500' : 'border-gray-600'" />
           <p v-if="emailError" class="text-red-500 text-sm mt-1">
             {{ emailError }}
@@ -46,7 +46,7 @@
             v-model="password"
             type="password"
             placeholder="Enter your password"
-            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-100"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-50"
             :class="passwordError ? 'border-red-500' : 'border-gray-600'" />
           <p v-if="passwordError" class="text-red-500 text-sm mt-1">
             {{ passwordError }}
@@ -61,7 +61,7 @@
             v-model="confirmPassword"
             type="password"
             placeholder="Confirm your password"
-            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-100"
+            class="w-full px-4 py-2 rounded-md bg-gray-700 border focus:outline-none focus:ring-2 focus:ring-indigo-400 text-gray-50"
             :class="
               confirmPasswordError ? 'border-red-500' : 'border-gray-600'
             " />

@@ -6,10 +6,16 @@
       <router-link
         to="/"
         class="flex items-center gap-3 hover:opacity-90 transition-opacity flex-shrink-0">
-        <img
-          src="/logo2.png"
-          alt="CineSphere Logo"
-          class="h-12 w-12 object-contain" />
+  <img
+  src="/logo.webp"
+  alt="CineSphere Logo"
+  class="h-12 w-12 object-contain"
+    fetchpriority="high"
+
+/>
+
+
+          
         <span class="text-3xl font-semibold text-indigo-300 tracking-wide">
           Cine<span class="text-indigo-400">Sphere</span>
         </span>

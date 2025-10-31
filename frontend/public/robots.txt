@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://my-cinesphere.netlify.app/sitemap.xml

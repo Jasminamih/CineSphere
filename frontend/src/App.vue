@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col bg-gray-900 text-gray-100 min-h-screen">
+  <div class="flex flex-col bg-gray-900 text-gray-50 min-h-screen">
     <Navbar />
     <main class="flex-1 flex items-center justify-center">
       <router-view />

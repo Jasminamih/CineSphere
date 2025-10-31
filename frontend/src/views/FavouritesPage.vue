@@ -1,10 +1,10 @@
 <template>
   <div
     class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-slate-900 via-blue-gray-800 to-slate-800 rounded-lg shadow-xl mt-8 mb-8">
-    <h1 class="text-3xl font-bold text-gray-100 mb-6 flex items-center">
-      <HeartSolid class="w-10 h-10 mr-2 text-red-500 inline-block" />
-      Your Favourites
-    </h1>
+    <h2 class="text-3xl font-bold text-gray-50 mb-6 flex items-center">
+  <HeartSolid class="w-10 h-10 mr-2 text-red-500 inline-block" aria-hidden="true" />
+  My Favourites
+</h2>
 
     <div
       v-if="favourites.length === 0"
@@ -16,11 +16,14 @@
       v-else
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <MovieCard
-        v-for="item in favourites"
+       v-for="(item, index) in favourites"
         :key="item.id"
         :item="item"
         :isFavourite="true"
+  :loading="index === 0 ? 'eager' : 'lazy'"
+  :is-first="index === 0"
         @toggle-favourite="removeFavourite" />
+        
     </div>
   </div>
 </template>
