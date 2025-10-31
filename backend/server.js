@@ -16,7 +16,11 @@ app.use(express.json());
 const { Pool } = pg;
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }, // required for Render
+  ssl: { rejectUnauthorized: false }, 
+});
+
+app.get("/", (req, res) => {
+  res.send("Server is running ✅");
 });
 
 // ----------------------
