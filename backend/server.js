@@ -199,13 +199,14 @@ app.delete("/favourites/:id", authenticate, async (req, res) => {
 });
 
 
-// Serve frontend build
+// Serve static files
 app.use(express.static(path.join(__dirname, "build")));
 
-// React Router fallback
-app.get("/:path(.*)", (req, res) => {
+// Fallback for React Router (any unmatched GET request)
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+
 
 // ----------------------
 // Start server
