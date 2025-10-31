@@ -118,14 +118,10 @@ app.get("/items", async (req, res) => {
     } else {
       query += ` ORDER BY order_index ASC, id ASC`;
     }
-    // Add limit & offset if provided
-    if (limit) query += ` LIMIT ${parseInt(limit as string)}`;
-    if (offset) query += ` OFFSET ${parseInt(offset as string)}`;
-    const { rows } = await pool.query(query, values);
-    console.log(
-      "Order check:",
-      rows.map((r) => [r.title, r.order_index])
-    );
+
+    const { limit, offset } = req.query;
+    if (limit) query += ` LIMIT ${parseInt(limit)}`;
+    if (offset) query += ` OFFSET ${parseInt(offset)}`;
 
     res.json(rows);
   } catch (err) {
