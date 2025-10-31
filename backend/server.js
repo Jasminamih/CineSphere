@@ -95,7 +95,8 @@ app.post("/auth/login", async (req, res) => {
 // Movies routes
 // ----------------------
 app.get("/items", async (req, res) => {
-  const { genre, type, search, sort } = req.query;
+  const { genre, type, search, sort, limit, offset } = req.query;
+
   try {
     let query = "SELECT * FROM movies";
     const conditions = [];
@@ -113,9 +114,9 @@ app.get("/items", async (req, res) => {
       values.push(`%${search}%`);
       conditions.push(`title ILIKE $${values.length}`);
     }
+
     if (conditions.length > 0) query += " WHERE " + conditions.join(" AND ");
 
-    // ✅ Always order by order_index first, then optional sort, then id
     const allowed = ["title", "type", "year"];
     if (sort && allowed.includes(sort)) {
       query += ` ORDER BY order_index ASC, ${sort} ASC, id ASC`;
@@ -123,15 +124,16 @@ app.get("/items", async (req, res) => {
       query += ` ORDER BY order_index ASC, id ASC`;
     }
 
-    const { limit, offset } = req.query;
     if (limit) query += ` LIMIT ${parseInt(limit)}`;
     if (offset) query += ` OFFSET ${parseInt(offset)}`;
 
+    const { rows } = await pool.query(query, values);
     res.json(rows);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 });
+
 
 app.get("/items/:id", async (req, res) => {
   const id = parseInt(req.params.id);
