@@ -182,7 +182,7 @@ const fetchItems = async () => {
 };
 
 const fetchFavourites = async () => {
-  if (!token) return; // skip if user not logged in
+  if (!token) return; 
 
   try {
     const res = await axios.get<Item[]>(`${API_URL}/favourites`, axiosConfig);
